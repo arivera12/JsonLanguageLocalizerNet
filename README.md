@@ -14,6 +14,19 @@ JsonLanguageLocalizerNet manage language localizations by using a json file inst
   - [x] Strong data types
   - [x] Json nested structures
   - [x] Reloading when file changes
+  
+## Why I would use JsonLanguageLocalizerNet over Microsoft Resource Manager?
+
+You may use JsonLanguageLocalizerNet over Resource Manager if:
+
+- [x] Wording may or could be changed over time.
+- [x] Translations can be remotely accessed.
+- [x] Application needs to be as lightweight as possible.
+- [x] New languages are added over time.
+
+Take note that including *.resx for every language will make your app output build bigger over time.
+
+Take note that adding support to a new language remotely doesn't never need recompiling and/or deploying.
 
 ## TODO - DOCUMENTATION
 
