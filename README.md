@@ -87,13 +87,15 @@ public JsonLanguageLocalizerService(IConfigurationRoot configurationRoot);
 ### IJsonLanguageLocalizerSupportedCulturesService Methods
 
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
-- IEnumerable&lt;CultureInfo&gt; GetLanguageLocalizerSupportedCultures()
+- IEnumerable&lt;CultureInfo&gt; GetLanguageLocalizerSupportedCulturesInfos()
 
-Take note that `GetLanguageLocalizerSupportedCultures()` specs that the json structure is an object of type of `LanguageLocalizerSupportedCultures` which it's as simple structure as this:
+Take note that `GetLanguageLocalizerSupportedCulturesInfos()` specs that the json structure is an object of type of `LanguageLocalizerSupportedCultures` which it's as simple structure as this:
 
 `{ "supportedCultures": ["en-US", "en", "es"] }`
 
-If you want to name this something else then you manage this on your own.
+If you want to name this something else then you manage this on your own. 
+
+I still invite you to use the built-in supported structure.
 
 ### JsonLanguageLocalizerSupportedCulturesService Methods
 
