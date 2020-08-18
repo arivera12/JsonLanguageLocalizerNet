@@ -13,7 +13,10 @@ JsonLanguageLocalizerNet manage language localizations by using a json file inst
   - [x] String notation
   - [x] Strong data types
   - [x] Json nested structures
-  - [x] Reloading when file changes
+  - [x] Reloading when file changes (Disk load)
+  - [x] Loading from
+    - [x] Disk
+    - [x] Network
   
 ## Why I would use JsonLanguageLocalizerNet over Microsoft Resource Manager?
 
