@@ -4,14 +4,23 @@ JsonLanguageLocalizerNet is an alternative to Microsoft's ResourceManager.
 
 JsonLanguageLocalizerNet manage language localizations by using a json file instead of *.resx file. 
 
-It's lightweight, human readable, extendable, portable and supports string notations, strong data types, json nested structures and reloading when file changes.
+## Features
+- [x] Lightweight
+- [x] Human Readable
+- [x] Extendable
+- [x] Portable
+- [x] Supports: 
+  - [x] String notation
+  - [x] Strong data types
+  - [x] Json nested structures
+  - [x] Reloading when file changes
 
-# TODO
+## TODO - DOCUMENTATION
 
-## IJsonLanguageLocalizerService
+### IJsonLanguageLocalizerService
 
-## JsonLanguageLocalizerService
+### JsonLanguageLocalizerService
 
-## IJsonLanguageLocalizerSupportedCulturesService
+### IJsonLanguageLocalizerSupportedCulturesService
 
-## JsonLanguageLocalizerSupportedCulturesService
+### JsonLanguageLocalizerSupportedCulturesService
