@@ -3,14 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Anthony G. Rivera Cosme</Authors>
     <Company />
     <Description>JsonLanguageLocalizerNet is an alternative to Microsoft's ResourceManager. JsonLanguageLocalizerNet manage language localizations by using a json file instead of *.resx file. It's lightweight, human readable, extendable, portable and supports string notations, strong data types as well json nested structures.</Description>
     <Copyright>Anthony G. Rivera Cosme</Copyright>
     <RepositoryUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
-    <PackageReleaseNotes>Initial commit.</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +20,13 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
