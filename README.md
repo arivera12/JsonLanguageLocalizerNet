@@ -5,18 +5,15 @@ JsonLanguageLocalizerNet is an alternative to Microsoft's ResourceManager.
 JsonLanguageLocalizerNet manage language localizations by using a json file instead of *.resx file. 
 
 ## Features
-- [x] Lightweight
-- [x] Human Readable
-- [x] Extendable
-- [x] Portable
-- [x] Supports: 
-  - [x] String notation
-  - [x] Strong data types
-  - [x] Json nested structures
-  - [x] Reloading when file changes (Disk load)
-  - [x] Loading from
-    - [x] Disk
-    - [x] Network
+
+- [x] String notation
+- [x] Strong data types
+- [x] Json nested structures
+- [x] Reloading when file changes (Disk load)
+- [x] Loading from
+  - [x] Disk
+  - [x] Network
+  
 ## Installation
 
 `Install-Package JsonLanguageLocalizerNet -Version 1.0.0`
@@ -112,7 +109,31 @@ public JsonLanguageLocalizerSupportedCulturesService(IConfiguration configuratio
 public JsonLanguageLocalizerSupportedCulturesService(IConfigurationRoot configurationRoot);
 ```
 
-## Why I would use JsonLanguageLocalizerNet over Microsoft Resource Manager?
+## Example
+
+`services.AddJsonLanguageLocalizerSupportedCultures(await httpClient.GetStreamAsync("cultures/supported.json"));`
+`services.AddLanguageLocalizer(await httpClient.GetStreamAsync("cultures/en.json"));`
+
+## Notes
+
+Take note that JsonLanguageLocalizerNet doesn't manage the translations by itself on this current version but I will provide one option for this soon with a example.
+
+## Frequently Asked Questions
+
+### What are the benefits for JsonLanguageLocalizerNet over Microsoft Resource Manager?
+
+The benefits are:
+
+- [x] No need of compiling
+- [x] Lightweight structure over the wire compared to .resx (.xml)
+- [x] Supports compression algorithms
+- [x] Human Readable
+- [x] Shareable
+- [x] Extendable
+- [x] Portable to other platforms
+- [x] Remotely accessible or Embeddable (embedding is not recommended)
+
+### Why I would use JsonLanguageLocalizerNet over Microsoft Resource Manager?
 
 You may use JsonLanguageLocalizerNet over Resource Manager if:
 
@@ -126,4 +147,5 @@ Take note that including *.resx for every in language in your application will m
 Take note that adding support to a new language remotely doesn't never need compiling and deploying, were .resx needs all this extra work since it's need to be compiled.
 
 ## License
+
 MIT
