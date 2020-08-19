@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 
 namespace JsonLanguageLocalizerNet
@@ -64,15 +63,9 @@ namespace JsonLanguageLocalizerNet
         /// <inheritdoc/>
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CultureInfo> GetLanguageLocalizerSupportedCulturesInfos()
+        public LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures()
         {
-            IList<CultureInfo> cultureInfos = new List<CultureInfo>();
-            var languageLocalizerSupportedCultures = Configuration.Get<LanguageLocalizerSupportedCultures>();
-            foreach (var languageLocalizerSupportedCulture in languageLocalizerSupportedCultures.SupportedCultures)
-            {
-                cultureInfos.Add(new CultureInfo(languageLocalizerSupportedCulture));
-            }
-            return cultureInfos;
+            return Configuration.Get<LanguageLocalizerSupportedCultures>();
         }
     }
 }

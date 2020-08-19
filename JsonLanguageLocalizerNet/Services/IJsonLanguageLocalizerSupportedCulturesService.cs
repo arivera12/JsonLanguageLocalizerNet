@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace JsonLanguageLocalizerNet
 {
@@ -10,9 +8,9 @@ namespace JsonLanguageLocalizerNet
     public interface IJsonLanguageLocalizerSupportedCulturesService : IConfiguration
     {
         /// <summary>
-        /// This method specs that the configuration file is on the expected format of <see cref="LanguageLocalizerSupportedCultures"/> and returns a enumerable of cultureinfo.
+        /// This method specs that the configuration file is on the expected format of <see cref="LanguageLocalizerSupportedCultures"/>.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<CultureInfo> GetLanguageLocalizerSupportedCulturesInfos();
+        LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures();
     }
 }
