@@ -84,11 +84,29 @@ public JsonLanguageLocalizerService(IConfigurationRoot configurationRoot);
 ### IJsonLanguageLocalizerSupportedCulturesService Methods
 
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
-- IEnumerable&lt;CultureInfo&gt; GetLanguageLocalizerSupportedCulturesInfos()
+- LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures()
 
-Take note that `GetLanguageLocalizerSupportedCulturesInfos()` specs that the json structure is an object of type of `LanguageLocalizerSupportedCultures` which it's as simple structure as this:
+Take note that `GetLanguageLocalizerSupportedCultures()` specs that the json structure is an object of type of `LanguageLocalizerSupportedCultures`.
 
-`{ "supportedCultures": ["en-US", "en", "es"] }`
+```
+{
+  "supportedCultures": [
+    {
+      "name": "en",
+      "localSource": "/locales/en.json",
+      "remoteSource": "https://www.myawesomedomain.com/locales/en.json"
+    },
+    {
+      "name": "es",
+      "localSource": "/locales/es.json",
+      "remoteSource": "https://www.myawesomedomain.com/locales/es.json"
+    }
+  ],
+  "useRemoteSourceAlwaysWhenAvailable": true,
+  "useLocalSourceWhenRemoteSourceFails": true,
+  "remoteRetryTimes": 3
+}
+```
 
 If you want to name this something else then you manage this on your own. 
 
