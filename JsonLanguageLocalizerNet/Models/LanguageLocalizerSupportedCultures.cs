@@ -11,6 +11,8 @@ namespace JsonLanguageLocalizerNet
         public bool UseRemoteSourceAlwaysWhenAvailable { get; set; }
         [JsonPropertyName("useLocalSourceWhenRemoteSourceFails")]
         public bool UseLocalSourceWhenRemoteSourceFails { get; set; }
+        [JsonPropertyName("localSourceStrategy")]
+        public SourceStrategy LocalSourceStrategy { get; set; }
         [JsonPropertyName("remoteRetryTimes")]
         public int RemoteRetryTimes { get; set; }
     }
