@@ -13,6 +13,6 @@ namespace JsonLanguageLocalizerNet
         /// This method specs that the configuration file is on the expected format of <see cref="LanguageLocalizerSupportedCultures"/> and returns a enumerable of cultureinfo.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<CultureInfo> GetLanguageLocalizerSupportedCultures();
+        IEnumerable<CultureInfo> GetLanguageLocalizerSupportedCulturesInfos();
     }
 }

@@ -64,7 +64,7 @@ namespace JsonLanguageLocalizerNet
         /// <inheritdoc/>
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<CultureInfo> GetLanguageLocalizerSupportedCultures()
+        public IEnumerable<CultureInfo> GetLanguageLocalizerSupportedCulturesInfos()
         {
             IList<CultureInfo> cultureInfos = new List<CultureInfo>();
             var languageLocalizerSupportedCultures = Configuration.Get<LanguageLocalizerSupportedCultures>();
