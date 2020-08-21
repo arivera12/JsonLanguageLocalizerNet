@@ -224,7 +224,7 @@ You may use JsonLanguageLocalizerNet over Resource Manager if:
 - [x] Wording may or could be changed over time.
 - [x] Translations can be remotely accessed.
 - [x] Application needs to be as lightweight as possible.
-- [x] New languages are added over time.
+- [x] New languages are added frequently over time.
 
 Take note that including *.resx for every in language in your application will make your application build output bigger over time.
 
