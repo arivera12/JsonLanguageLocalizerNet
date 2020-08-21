@@ -69,6 +69,7 @@ Data should be provided when registering the service but it can be loaded/overri
 ### JsonLanguageLocalizerService Methods
 
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
+
 ```
 public JsonLanguageLocalizerService();
 public JsonLanguageLocalizerService(ConfigurationBuilder configurationBuilder);
@@ -94,16 +95,19 @@ Take note that `GetLanguageLocalizerSupportedCultures()` specs that the json str
     {
       "name": "en",
       "localSource": "/locales/en.json",
-      "remoteSource": "https://www.myawesomedomain.com/locales/en.json"
+      "remoteSource": "https://www.myawesomedomain.com/cultures/en.json"
     },
     {
       "name": "es",
       "localSource": "/locales/es.json",
-      "remoteSource": "https://www.myawesomedomain.com/locales/es.json"
+      "remoteSource": "https://www.myawesomedomain.com/cultures/es.json"
     }
   ],
+  "fallbackCulture": "en",
+  "httpMethod": "GET",
   "useRemoteSourceAlwaysWhenAvailable": true,
   "useLocalSourceWhenRemoteSourceFails": true,
+  "localSourceStrategy": 0, //0 - FileSystem, 1 - HttpClient
   "remoteRetryTimes": 3
 }
 ```
@@ -115,6 +119,7 @@ I still invite you to use the built-in supported structure.
 ### JsonLanguageLocalizerSupportedCulturesService Methods
 
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
+
 ```
 public JsonLanguageLocalizerSupportedCulturesService();
 public JsonLanguageLocalizerSupportedCulturesService(ConfigurationBuilder configurationBuilder);
@@ -127,10 +132,42 @@ public JsonLanguageLocalizerSupportedCulturesService(IConfiguration configuratio
 public JsonLanguageLocalizerSupportedCulturesService(IConfigurationRoot configurationRoot);
 ```
 
-## Example
+## Blazor Example
 
-`services.AddJsonLanguageLocalizerSupportedCultures(await httpClient.GetStreamAsync("cultures/supported.json"));`
-`services.AddLanguageLocalizer(await httpClient.GetStreamAsync("cultures/en.json"));`
+```
+WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+var httpClient = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+
+builder.Services.AddTransient(sp => httpClient);
+
+var LanguageLocalizerSupportedCultures = await httpClient.GetJsonAsync<LanguageLocalizerSupportedCultures>("cultures/supported.json");
+
+builder.Services
+.AddJsonLanguageLocalizerSupportedCultures(new MemoryStream(Encoding.ASCII.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(LanguageLocalizerSupportedCultures))));
+
+builder.Services.AddJsonLanguageLocalizer();
+
+... //Continue others service registrations
+
+WebAssemblyHost host = builder.Build();
+
+await host.SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync(LanguageLocalizerSupportedCultures.FallbackCulture);
+
+var jsonLanguageLocalizer = host.Services.GetRequiredService<IJsonLanguageLocalizerService>();
+
+var jsonLanguageLocalizerService = await JsonLanguageLocalizerServiceHelper.GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(httpClient, LanguageLocalizerSupportedCultures);
+
+jsonLanguageLocalizer.ChangeLanguageLocalizer(jsonLanguageLocalizerService);
+
+await host.RunAsync();
+```
+
+This example works with Blazor WASM.
+
+For Blazor Server/MVC/Web Api this may work as well but you should use the overloads which reads from the web server path instead of the http client, since it's more faster and efficient.
+
+I will provide Blazor Server/MVC/Web Api examples later.
 
 ## Notes
 
