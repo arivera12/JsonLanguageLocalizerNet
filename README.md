@@ -24,6 +24,8 @@ JsonLanguageLocalizerNet manage language localizations by using a json file inst
 
 ```
 services.AddJsonLanguageLocalizer();
+services.AddJsonLanguageLocalizer(sonLanguageLocalizerService jsonLanguageLocalizerService);
+services.AddJsonLanguageLocalizer(Func<IServiceProvider, JsonLanguageLocalizerService> provider);
 services.AddJsonLanguageLocalizer(ConfigurationBuilder configurationBuilder);
 services.AddJsonLanguageLocalizer(IConfiguration configuration);
 services.AddJsonLanguageLocalizer(IConfigurationRoot configurationRoot);
@@ -42,6 +44,8 @@ Data should be provided when registering the service but it can be loaded/overri
 
 ```
 services.AddJsonLanguageLocalizerSupportedCultures();
+services.AddJsonLanguageLocalizerSupportedCultures(JsonLanguageLocalizerSupportedCulturesService jsonLanguageLocalizerSupportedCulturesService);
+services.AddJsonLanguageLocalizerSupportedCultures(Func<IServiceProvider, JsonLanguageLocalizerSupportedCulturesService> provider);
 services.AddJsonLanguageLocalizerSupportedCultures(ConfigurationBuilder configurationBuilder);
 services.AddJsonLanguageLocalizerSupportedCultures(IConfiguration configuration);
 services.AddJsonLanguageLocalizerSupportedCultures(IConfigurationRoot configurationRoot);
@@ -64,9 +68,17 @@ Data should be provided when registering the service but it can be loaded/overri
 
 ### IJsonLanguageLocalizerService Methods
 
+```
+void ChangeLanguageLocalizer(JsonLanguageLocalizerService jsonLanguageLocalizerService);
+```
+
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
 
 ### JsonLanguageLocalizerService Methods
+
+```
+void ChangeLanguageLocalizer(JsonLanguageLocalizerService jsonLanguageLocalizerService);
+```
 
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
 
@@ -84,8 +96,12 @@ public JsonLanguageLocalizerService(IConfigurationRoot configurationRoot);
 
 ### IJsonLanguageLocalizerSupportedCulturesService Methods
 
+```
+void ChangeLanguageLocalizerSupportedCultures(JsonLanguageLocalizerSupportedCulturesService jsonLanguageLocalizerSupportedCulturesService);
+LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures();
+```
+
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
-- LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures()
 
 Take note that `GetLanguageLocalizerSupportedCultures()` specs that the json structure is an object of type of `LanguageLocalizerSupportedCultures`.
 
@@ -118,6 +134,11 @@ I still invite you to use the built-in supported structure.
 
 ### JsonLanguageLocalizerSupportedCulturesService Methods
 
+```
+void ChangeLanguageLocalizerSupportedCultures(JsonLanguageLocalizerSupportedCulturesService jsonLanguageLocalizerSupportedCulturesService);
+LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures();
+```
+
 - [IConfiguration](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.iconfiguration?view=dotnet-plat-ext-3.1)
 
 ```
@@ -135,6 +156,12 @@ public JsonLanguageLocalizerSupportedCulturesService(IConfigurationRoot configur
 ## Blazor Example
 
 ```
+using JsonLanguageLocalizerNet;
+using JsonLanguageLocalizerNet.Blazor;
+using JsonLanguageLocalizerNet.Blazor.Helpers;
+
+..//Omitted for brevity
+
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 var httpClient = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
@@ -152,12 +179,16 @@ builder.Services.AddJsonLanguageLocalizer();
 
 WebAssemblyHost host = builder.Build();
 
+//Sets the Current Thread Culture Info
 await host.SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync(LanguageLocalizerSupportedCultures.FallbackCulture);
 
+//Loads the jsonLanguageLocalizer service 
 var jsonLanguageLocalizer = host.Services.GetRequiredService<IJsonLanguageLocalizerService>();
 
+//Loads the service with the source by the current thread culture info
 var jsonLanguageLocalizerService = await JsonLanguageLocalizerServiceHelper.GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(httpClient, LanguageLocalizerSupportedCultures);
 
+//Initializes the jsonLanguageLocalizer service
 jsonLanguageLocalizer.ChangeLanguageLocalizer(jsonLanguageLocalizerService);
 
 await host.RunAsync();
