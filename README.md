@@ -62,9 +62,11 @@ Data should be provided when registering the service but it can be loaded/overri
 
 ## Usage
 
-`IJsonLanguageLocalizerService JsonLanguageLocalizerService { get; set; }`
+```
+IJsonLanguageLocalizerService JsonLanguageLocalizerService { get; set; }
 
-`IJsonLanguageLocalizerSupportedCulturesService JsonLanguageLocalizerSupportedCulturesService { get; set; }`
+IJsonLanguageLocalizerSupportedCulturesService JsonLanguageLocalizerSupportedCulturesService { get; set; }
+```
 
 ### IJsonLanguageLocalizerService Methods
 
@@ -199,10 +201,6 @@ This example works with Blazor WASM.
 For Blazor Server/MVC/Web Api this may work as well but you should use the overloads which reads from the web server path instead of the http client, since it's more faster and efficient.
 
 I will provide Blazor Server/MVC/Web Api examples later.
-
-## Notes
-
-Take note that JsonLanguageLocalizerNet doesn't manage the translations by itself on this current version but I will provide one option for this soon with a example.
 
 ## Frequently Asked Questions
 
