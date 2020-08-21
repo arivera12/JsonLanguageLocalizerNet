@@ -16,7 +16,11 @@ JsonLanguageLocalizerNet manage language localizations by using a json file inst
   
 ## Installation
 
-`Install-Package JsonLanguageLocalizerNet -Version 1.0.0`
+```
+Install-Package JsonLanguageLocalizerNet -Version 1.0.0
+//For blazor
+Install-Package JsonLanguageLocalizerNet.Blazor -Version 1.0.0
+```
 
 ## Register the services in your services method
 
