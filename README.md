@@ -9,10 +9,16 @@ JsonLanguageLocalizerNet manage language localizations by using a json file inst
 - [x] String notation
 - [x] Strong data types
 - [x] Json nested structures
-- [x] Reloading when file changes (Disk load)
+- [x] Reloading when file changes (Disk load only)
 - [x] Loading from
   - [x] Disk
   - [x] Network
+- [x] Change culture and/or translations with or without reloading
+- [x] Integrations
+  - [x] AspNetCore (Manually, Auto Integration With Supported Cultures Soon)
+  - [x] Xamarin (Manually, Auto Integration With Supported Cultures Soon)
+  - [x] Blazor Wasm & Server (Auto Integrated With Supported Cultures)
+  - [x] Everywhere .net is able to run
   
 ## Installation
 
