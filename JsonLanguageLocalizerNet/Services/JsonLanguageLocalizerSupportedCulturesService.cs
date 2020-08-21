@@ -45,7 +45,7 @@ namespace JsonLanguageLocalizerNet
         {
             Configuration = configurationRoot;
         }
-        private protected IConfiguration Configuration { get; set; }
+        private IConfiguration Configuration { get; set; }
         public string this[string key] { get => Configuration[key]; set => _ = value; }
         public IEnumerable<IConfigurationSection> GetChildren()
         {
@@ -66,6 +66,11 @@ namespace JsonLanguageLocalizerNet
         public LanguageLocalizerSupportedCultures GetLanguageLocalizerSupportedCultures()
         {
             return Configuration.Get<LanguageLocalizerSupportedCultures>();
+        }
+
+        public void ChangeLanguageLocalizerSupportedCultures(JsonLanguageLocalizerSupportedCulturesService jsonLanguageLocalizerSupportedCulturesService)
+        {
+            Configuration = jsonLanguageLocalizerSupportedCulturesService.Configuration;
         }
     }
 }

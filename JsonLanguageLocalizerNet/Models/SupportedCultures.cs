@@ -7,10 +7,10 @@ namespace JsonLanguageLocalizerNet
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
-        [JsonPropertyName("localUri")]
-        public string LocalUri { get; set; }
-        [JsonPropertyName("remoteUri")]
-        public string RemoteUri { get; set; }
+        [JsonPropertyName("localSource")]
+        public string LocalSource { get; set; }
+        [JsonPropertyName("remoteSource")]
+        public string RemoteSource { get; set; }
         [JsonIgnore]
         private CultureInfo cultureInfo { get; set; }
         [JsonIgnore]

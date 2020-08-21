@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Authors>Anthony G. Rivera Cosme</Authors>
+    <Company>Anthony G. Rivera Cosme</Company>
+    <Description>JsonLanguageLocalizerNet.Blazor is a package with extension methods to support blazor enviroments.</Description>
+    <Copyright>Anthony G. Rivera Cosme</Copyright>
+    <PackageProjectUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</RepositoryUrl>
+    <RepositoryType>c#</RepositoryType>
+    <PackageReleaseNotes>initial release.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorBrowserStorage" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JsonLanguageLocalizerNet\JsonLanguageLocalizerNet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

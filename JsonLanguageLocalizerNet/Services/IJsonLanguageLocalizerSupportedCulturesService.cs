@@ -7,6 +7,7 @@ namespace JsonLanguageLocalizerNet
     /// </summary>
     public interface IJsonLanguageLocalizerSupportedCulturesService : IConfiguration
     {
+        void ChangeLanguageLocalizerSupportedCultures(JsonLanguageLocalizerSupportedCulturesService jsonLanguageLocalizerSupportedCulturesService);
         /// <summary>
         /// This method specs that the configuration file is on the expected format of <see cref="LanguageLocalizerSupportedCultures"/>.
         /// </summary>

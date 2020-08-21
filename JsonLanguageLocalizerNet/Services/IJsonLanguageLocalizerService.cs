@@ -7,5 +7,6 @@ namespace JsonLanguageLocalizerNet
     /// </summary>
     public interface IJsonLanguageLocalizerService : IConfiguration
     {
+        void ChangeLanguageLocalizer(JsonLanguageLocalizerService jsonLanguageLocalizerService);
     }
 }

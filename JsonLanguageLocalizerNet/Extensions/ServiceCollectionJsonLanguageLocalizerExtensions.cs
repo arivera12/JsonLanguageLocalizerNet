@@ -12,6 +12,14 @@ namespace JsonLanguageLocalizerNet
         {
             return services.AddSingleton<IJsonLanguageLocalizerService, JsonLanguageLocalizerService>(provider => new JsonLanguageLocalizerService(new ConfigurationBuilder().Build()));
         }
+        public static IServiceCollection AddJsonLanguageLocalizer(this IServiceCollection services, JsonLanguageLocalizerService jsonLanguageLocalizerService)
+        {
+            return services.AddSingleton<IJsonLanguageLocalizerService, JsonLanguageLocalizerService>(provider => jsonLanguageLocalizerService);
+        }
+        public static IServiceCollection AddJsonLanguageLocalizer(this IServiceCollection services, Func<IServiceProvider, JsonLanguageLocalizerService> provider)
+        {
+            return services.AddSingleton<IJsonLanguageLocalizerService, JsonLanguageLocalizerService>(provider);
+        }
         public static IServiceCollection AddJsonLanguageLocalizer(this IServiceCollection services, ConfigurationBuilder configurationBuilder)
         {
             return services.AddSingleton<IJsonLanguageLocalizerService, JsonLanguageLocalizerService>(provider => new JsonLanguageLocalizerService(configurationBuilder));

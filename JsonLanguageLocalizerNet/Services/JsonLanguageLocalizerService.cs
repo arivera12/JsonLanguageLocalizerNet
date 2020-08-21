@@ -59,5 +59,10 @@ namespace JsonLanguageLocalizerNet
         {
             return Configuration.GetSection(key);
         }
+
+        public void ChangeLanguageLocalizer(JsonLanguageLocalizerService jsonLanguageLocalizerService)
+        {
+            Configuration = jsonLanguageLocalizerService.Configuration;
+        }
     }
 }
