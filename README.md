@@ -1,5 +1,17 @@
 # JsonLanguageLocalizerNet
 
+<p>
+	<a href="https://www.nuget.org/packages/JsonLanguageLocalizerNet">
+	    <img src="https://buildstats.info/nuget/JsonLanguageLocalizerNet?v=1.0.0" />
+	</a>
+  <a href="https://www.nuget.org/packages/JsonLanguageLocalizerNet.Blazor">
+	    <img src="https://buildstats.info/nuget/JsonLanguageLocalizerNet.Blazor?v=1.0.0" />
+	</a>
+	<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RSE2NMEG3F7QU&source=url">
+	    <img src="https://img.shields.io/badge/Donate-PayPal-green.svg" />
+	</a>
+</p>
+
 JsonLanguageLocalizerNet is an alternative to Microsoft's ResourceManager. 
 
 JsonLanguageLocalizerNet manage language localizations by using a json file instead of *.resx file. 
