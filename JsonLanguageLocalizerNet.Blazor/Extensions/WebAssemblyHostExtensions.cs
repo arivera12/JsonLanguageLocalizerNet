@@ -1,5 +1,4 @@
-﻿using BlazorBrowserStorage;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using System;
@@ -12,12 +11,14 @@ namespace JsonLanguageLocalizerNet.Blazor
     public static class WebAssemblyHostExtension
     {
         /// <summary>
-        /// Sets the DefaultThreadCurrentCulture && DefaultThreadCurrentUICulture for the application.  
+        /// Sets the DefaultThreadCurrentCulture && DefaultThreadCurrentUICulture for the application.
+        /// Take note that localStorageKey default value ApplicationLocale is compatible with OneLine Framework implementation.
         /// </summary>
         /// <param name="webAssemblyHost"></param>
         /// <param name="fallbackCulture"></param>
+        /// <param name="localStorageKey"></param>
         /// <returns></returns>
-        public static async Task SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync(this WebAssemblyHost webAssemblyHost, string fallbackCulture)
+        public static async Task SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync(this WebAssemblyHost webAssemblyHost, string fallbackCulture, string localStorageKey = "ApplicationLocale")
         {
             var supportedCultures = webAssemblyHost.Services.GetRequiredService<IJsonLanguageLocalizerSupportedCulturesService>();
             //Verify that there is at least one supported culture
@@ -31,8 +32,8 @@ namespace JsonLanguageLocalizerNet.Blazor
                 throw new ArgumentException($"The fallbackCulture value ({fallbackCulture}) could not be found the supported cultures. The fallbackCulture value must be included in the suppoted cultures.");
             }
             //We try to lookup the locale in the browser storage
-            var localStorage = webAssemblyHost.Services.GetRequiredService<ILocalStorage>();
-            var applicationLocale = await localStorage.GetItem<string>("ApplicationLocale");
+            var jS = webAssemblyHost.Services.GetRequiredService<IJSRuntime>();
+            var applicationLocale = await jS.InvokeAsync<string>("eval", $"window.localStorage.getItem('{localStorageKey}')");
             if (string.IsNullOrWhiteSpace(applicationLocale))
             {
                 //We try use the browser navigator language

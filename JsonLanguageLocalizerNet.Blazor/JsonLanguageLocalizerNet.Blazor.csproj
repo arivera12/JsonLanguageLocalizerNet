@@ -12,11 +12,11 @@
     <PackageProjectUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
-    <PackageReleaseNotes>initial release.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed bug on SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorBrowserStorage" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
   </ItemGroup>
 

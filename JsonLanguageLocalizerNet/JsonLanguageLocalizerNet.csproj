@@ -10,9 +10,10 @@
     <Copyright>Anthony G. Rivera Cosme</Copyright>
     <RepositoryUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed bug on SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
