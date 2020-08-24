@@ -12,8 +12,8 @@
     <PackageProjectUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
-    <PackageReleaseNotes>Fixed bug on SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync</PackageReleaseNotes>
-    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Removed JsonLanguageLocalizerServiceHelper and JsonLanguageLocalizerNet.Blazor.Helpers namespace.</PackageReleaseNotes>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
