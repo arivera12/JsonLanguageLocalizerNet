@@ -10,10 +10,12 @@
     <Copyright>Anthony G. Rivera Cosme</Copyright>
     <RepositoryUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</RepositoryUrl>
     <RepositoryType>c#</RepositoryType>
-    <PackageReleaseNotes>Removed JsonLanguageLocalizerServiceHelper and JsonLanguageLocalizerNet.Blazor.Helpers namespace.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added missing extension. Refactored helpers methods.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/arivera12/JsonLanguageLocalizerNet</PackageProjectUrl>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

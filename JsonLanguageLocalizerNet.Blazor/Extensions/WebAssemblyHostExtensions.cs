@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.Components.WebAssembly.Http;
+﻿using JsonLanguageLocalizerNet.Blazor.Helpers;
+using JsonLanguageLocalizerNet.Helpers;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using System;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -113,7 +113,7 @@ namespace JsonLanguageLocalizerNet.Blazor
             }
             if (languageLocalizerSupportedCultures.UseRemoteSourceAlwaysWhenAvailable)
             {
-                result = await TryGetRemoteSourceAsync(httpClient, languageLocalizerSupportedCultures.HttpMethod, languageLocalizerSupportedCultureSelected.RemoteSource, languageLocalizerSupportedCultures.RemoteRetryTimes);
+                result = await JsonLanguageLocalizerServiceBlazorHelper.TryGetRemoteSourceAsync(httpClient, languageLocalizerSupportedCultures.HttpMethod, languageLocalizerSupportedCultureSelected.RemoteSource, languageLocalizerSupportedCultures.RemoteRetryTimes);
                 if (result != null)
                 {
                     return result;
@@ -127,11 +127,11 @@ namespace JsonLanguageLocalizerNet.Blazor
             {
                 if (languageLocalizerSupportedCultures.LocalSourceStrategy == SourceStrategy.FileSystem)
                 {
-                    result = TryGetLocalSourceFromFileSystem(languageLocalizerSupportedCultureSelected.LocalSource);
+                    result = JsonLanguageLocalizerServiceHelper.TryGetLocalSourceFromFileSystem(languageLocalizerSupportedCultureSelected.LocalSource);
                 }
                 else if (languageLocalizerSupportedCultures.LocalSourceStrategy == SourceStrategy.HttpRequest)
                 {
-                    result = await TryGetRemoteSourceAsync(httpClient, languageLocalizerSupportedCultures.HttpMethod, languageLocalizerSupportedCultureSelected.LocalSource, languageLocalizerSupportedCultures.RemoteRetryTimes);
+                    result = await JsonLanguageLocalizerServiceHelper.TryGetRemoteSourceAsync(httpClient, languageLocalizerSupportedCultures.HttpMethod, languageLocalizerSupportedCultureSelected.LocalSource, languageLocalizerSupportedCultures.RemoteRetryTimes);
                 }
                 if (result != null)
                 {
@@ -141,36 +141,6 @@ namespace JsonLanguageLocalizerNet.Blazor
             if (result == null)
             {
                 throw new Exception("We could not load neither remote or local source of Language Localizer");
-            }
-            return null;
-        }
-        private static async Task<JsonLanguageLocalizerService> TryGetRemoteSourceAsync(HttpClient httpClient, string httpMethod, string requestUri, int remoteRetryTimes)
-        {
-            do
-            {
-                try
-                {
-                    var request = new HttpRequestMessage(new HttpMethod(httpMethod), requestUri);
-                    request.SetBrowserRequestCache(BrowserRequestCache.NoCache);
-                    var response = await httpClient.SendAsync(request);
-                    return new JsonLanguageLocalizerService(await response.Content.ReadAsStreamAsync());
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            } while (--remoteRetryTimes > 0);
-            return null;
-        }
-        private static JsonLanguageLocalizerService TryGetLocalSourceFromFileSystem(string path)
-        {
-            try
-            {
-                return new JsonLanguageLocalizerService(File.OpenRead(path));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
             return null;
         }
