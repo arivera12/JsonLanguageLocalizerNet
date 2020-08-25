@@ -9,6 +9,51 @@ namespace JsonLanguageLocalizerNet.Helpers
 {
     public static class JsonLanguageLocalizerServiceHelper
     {
+        public static async Task<JsonLanguageLocalizerService> GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(HttpClient httpClient, LanguageLocalizerSupportedCultures languageLocalizerSupportedCultures)
+        {
+            if (!languageLocalizerSupportedCultures.SupportedCultures.Any())
+            {
+                throw new Exception("There is no supported cultures defined. Make sure there is at least one supported language.");
+            }
+            JsonLanguageLocalizerService result = null;
+            var languageLocalizerSupportedCultureSelected = languageLocalizerSupportedCultures.SupportedCultures.FirstOrDefault(w => w.CultureInfo.Equals(CultureInfo.DefaultThreadCurrentCulture));
+            if (languageLocalizerSupportedCultureSelected == null)
+            {
+                languageLocalizerSupportedCultureSelected = languageLocalizerSupportedCultures.SupportedCultures.FirstOrDefault(w => w.CultureInfo.Equals(new CultureInfo(languageLocalizerSupportedCultures.FallbackCulture)));
+            }
+            if (languageLocalizerSupportedCultures.UseRemoteSourceAlwaysWhenAvailable)
+            {
+                result = await TryGetRemoteSourceAsync(httpClient, languageLocalizerSupportedCultures.HttpMethod, languageLocalizerSupportedCultureSelected.RemoteSource, languageLocalizerSupportedCultures.RemoteRetryTimes);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            if (result == null && !languageLocalizerSupportedCultures.UseLocalSourceWhenRemoteSourceFails)
+            {
+                throw new Exception("We could not load the remote source of Language Localizer");
+            }
+            if (result == null && languageLocalizerSupportedCultures.UseLocalSourceWhenRemoteSourceFails)
+            {
+                if (languageLocalizerSupportedCultures.LocalSourceStrategy == SourceStrategy.FileSystem)
+                {
+                    result = TryGetLocalSourceFromFileSystem(languageLocalizerSupportedCultureSelected.LocalSource);
+                }
+                else if (languageLocalizerSupportedCultures.LocalSourceStrategy == SourceStrategy.HttpRequest)
+                {
+                    result = await TryGetRemoteSourceAsync(httpClient, languageLocalizerSupportedCultures.HttpMethod, languageLocalizerSupportedCultureSelected.LocalSource, languageLocalizerSupportedCultures.RemoteRetryTimes);
+                }
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            if (result == null)
+            {
+                throw new Exception("We could not load neither remote or local source of Language Localizer");
+            }
+            return null;
+        }
         public static async Task<JsonLanguageLocalizerService> GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(HttpClient httpClient, LanguageLocalizerSupportedCultures languageLocalizerSupportedCultures, string applicationLocale)
         {
             if (!languageLocalizerSupportedCultures.SupportedCultures.Any())

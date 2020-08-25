@@ -36,7 +36,7 @@ namespace JsonLanguageLocalizerNet.Blazor
             }
             //We try to lookup the locale in the browser storage
             var jsRuntime = webAssemblyHost.Services.GetRequiredService<IJSRuntime>();
-            var applicationLocale = await jsRuntime.InvokeAsync<string>("eval", $"window.localStorage.getItem('{localStorageKey}')");
+            var applicationLocale = await jsRuntime.InvokeAsync<string>("window.localStorage.getItem", localStorageKey);
             if (string.IsNullOrWhiteSpace(applicationLocale))
             {
                 //We try use the browser navigator language
@@ -87,7 +87,7 @@ namespace JsonLanguageLocalizerNet.Blazor
         private static async Task InitializeDefaultThreadCurrentCultureAndUIAsync(this WebAssemblyHost webAssemblyHost, string name, string localStorageKey)
         {
             var jsRuntime = webAssemblyHost.Services.GetRequiredService<IJSRuntime>();
-            await jsRuntime.InvokeAsync<string>("eval", $"window.localStorage.setItem('{localStorageKey}', '{name}')");
+            await jsRuntime.InvokeAsync<string>("window.localStorage.setItem", localStorageKey, name);
             var cultureInfo = new CultureInfo(name);
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
@@ -105,7 +105,7 @@ namespace JsonLanguageLocalizerNet.Blazor
             }
             JsonLanguageLocalizerService result = null;
             var jsRuntime = webAssemblyHost.Services.GetRequiredService<IJSRuntime>();
-            var applicationLocale = await jsRuntime.InvokeAsync<string>("eval", $"window.localStorage.getItem('{localStorageKey}')");
+            var applicationLocale = await jsRuntime.InvokeAsync<string>("window.localStorage.getItem", localStorageKey);
             var languageLocalizerSupportedCultureSelected = languageLocalizerSupportedCultures.SupportedCultures.FirstOrDefault(w => w.Name == applicationLocale);
             if (languageLocalizerSupportedCultureSelected == null)
             {
