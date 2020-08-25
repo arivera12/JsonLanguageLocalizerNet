@@ -60,7 +60,7 @@ services.AddJsonLanguageLocalizer(IConfiguration configuration);
 services.AddJsonLanguageLocalizer(IConfigurationRoot configurationRoot);
 services.AddJsonLanguageLocalizer(Stream stream);
 services.AddJsonLanguageLocalizer(string path);
-services.AddJsonLanguageLocalizerAction<JsonConfigurationSource> configureSource);
+services.AddJsonLanguageLocalizer(Action<JsonConfigurationSource> configureSource);
 services.AddJsonLanguageLocalizer(string path, bool optional);
 services.AddJsonLanguageLocalizer(string path, bool optional, bool reloadOnChange);
 ```
@@ -80,7 +80,7 @@ services.AddJsonLanguageLocalizerSupportedCultures(IConfiguration configuration)
 services.AddJsonLanguageLocalizerSupportedCultures(IConfigurationRoot configurationRoot);
 services.AddJsonLanguageLocalizerSupportedCultures(Stream stream);
 services.AddJsonLanguageLocalizerSupportedCultures(string path);
-services.AddJsonLanguageLocalizerSupportedCultures<JsonConfigurationSource> configureSource);
+services.AddJsonLanguageLocalizerSupportedCultures(Action<JsonConfigurationSource> configureSource);
 services.AddJsonLanguageLocalizerSupportedCultures(string path, bool optional);
 services.AddJsonLanguageLocalizerSupportedCultures(string path, bool optional, bool reloadOnChange);
 ```
