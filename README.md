@@ -188,7 +188,6 @@ public JsonLanguageLocalizerSupportedCulturesService(IConfigurationRoot configur
 
 ```
 using JsonLanguageLocalizerNet;
-using JsonLanguageLocalizerNet.Blazor;
 using JsonLanguageLocalizerNet.Blazor.Helpers;
 
 ..//Omitted for brevity
@@ -210,14 +209,35 @@ builder.Services.AddJsonLanguageLocalizer();
 
 WebAssemblyHost host = builder.Build();
 
-//Sets the Current Thread Culture Info
-await host.SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCulturesServiceAsync(LanguageLocalizerSupportedCultures.FallbackCulture);
+string applicationLocale;
 
+//We try to lookup the locale in the browser storage
+var jsRuntime = host.Services.GetRequiredService<IJSRuntime>();
+applicationLocale = await jsRuntime.InvokeAsync<string>("window.localStorage.getItem", "ApplicationLocale");
+if (string.IsNullOrWhiteSpace(applicationLocale))
+{
+    //We try use the browser navigator language
+    var navigatorLanguage = await jsRuntime.InvokeAsync<string>("eval", "navigator.language");
+    //If is empty we use the fallback culture
+    if (string.IsNullOrWhiteSpace(navigatorLanguage))
+    {
+	//The navigator language is not supported then we use the fallback culture
+	applicationLocale = LanguageLocalizerSupportedCultures.FallbackCulture;
+    }
+}
+//Set the application locale with the current or fallback
+await jsRuntime.InvokeAsync<string>("window.localStorage.setItem", "ApplicationLocale", applicationLocale);
+
+//Set's the default thread current culture
+var cultureInfo = new CultureInfo(applicationLocale);
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+	    
 //Loads the jsonLanguageLocalizer service 
 var jsonLanguageLocalizer = host.Services.GetRequiredService<IJsonLanguageLocalizerService>();
 
-//Loads the service with the source by the current thread culture info
-var jsonLanguageLocalizerService = await host.GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(httpClient, LanguageLocalizerSupportedCultures);
+//Loads the service with the source by the specified application locale
+var jsonLanguageLocalizerService = await host.GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(httpClient, LanguageLocalizerSupportedCultures, applicationLocale);
 
 //Initializes the jsonLanguageLocalizer service
 jsonLanguageLocalizer.ChangeLanguageLocalizer(jsonLanguageLocalizerService);
