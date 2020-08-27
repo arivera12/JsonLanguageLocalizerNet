@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30404.54
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonLanguageLocalizerNet", "JsonLanguageLocalizerNet\JsonLanguageLocalizerNet.csproj", "{0824B12D-4B57-4079-8A3F-7D5C70F7B4E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonLanguageLocalizerNet.Blazor", "JsonLanguageLocalizerNet.Blazor\JsonLanguageLocalizerNet.Blazor.csproj", "{C79B78E4-A7FB-4E3D-B1E4-5BD31581D2AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonLanguageLocalizerNet.Blazor", "JsonLanguageLocalizerNet.Blazor\JsonLanguageLocalizerNet.Blazor.csproj", "{C79B78E4-A7FB-4E3D-B1E4-5BD31581D2AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
