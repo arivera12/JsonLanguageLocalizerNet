@@ -2,7 +2,7 @@
 
 <p>
 	<a href="https://www.nuget.org/packages/JsonLanguageLocalizerNet">
-	    <img src="https://buildstats.info/nuget/JsonLanguageLocalizerNet?v=1.0.1" />
+	    <img src="https://buildstats.info/nuget/JsonLanguageLocalizerNet?v=1.0.4" />
 	</a>
 	<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RSE2NMEG3F7QU&source=url">
 	    <img src="https://img.shields.io/badge/Donate-PayPal-green.svg" />
@@ -12,7 +12,7 @@
 # JsonLanguageLocalizerNet.Blazor
 <p>
   	<a href="https://www.nuget.org/packages/JsonLanguageLocalizerNet.Blazor">
-	    <img src="https://buildstats.info/nuget/JsonLanguageLocalizerNet.Blazor?v=1.0.1" />
+	    <img src="https://buildstats.info/nuget/JsonLanguageLocalizerNet.Blazor?v=1.0.4" />
 	</a>
 	<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RSE2NMEG3F7QU&source=url">
 	    <img src="https://img.shields.io/badge/Donate-PayPal-green.svg" />
@@ -42,9 +42,9 @@ JsonLanguageLocalizerNet manage language localizations by using a json file inst
 ## Installation
 
 ```
-Install-Package JsonLanguageLocalizerNet -Version 1.0.1
+Install-Package JsonLanguageLocalizerNet -Version 1.0.4
 //For blazor
-Install-Package JsonLanguageLocalizerNet.Blazor -Version 1.0.1
+Install-Package JsonLanguageLocalizerNet.Blazor -Version 1.0.4
 ```
 
 ## Register the services in your services method
@@ -60,7 +60,7 @@ services.AddJsonLanguageLocalizer(IConfiguration configuration);
 services.AddJsonLanguageLocalizer(IConfigurationRoot configurationRoot);
 services.AddJsonLanguageLocalizer(Stream stream);
 services.AddJsonLanguageLocalizer(string path);
-services.AddJsonLanguageLocalizerAction<JsonConfigurationSource> configureSource);
+services.AddJsonLanguageLocalizer(Action<JsonConfigurationSource> configureSource);
 services.AddJsonLanguageLocalizer(string path, bool optional);
 services.AddJsonLanguageLocalizer(string path, bool optional, bool reloadOnChange);
 ```
@@ -80,7 +80,7 @@ services.AddJsonLanguageLocalizerSupportedCultures(IConfiguration configuration)
 services.AddJsonLanguageLocalizerSupportedCultures(IConfigurationRoot configurationRoot);
 services.AddJsonLanguageLocalizerSupportedCultures(Stream stream);
 services.AddJsonLanguageLocalizerSupportedCultures(string path);
-services.AddJsonLanguageLocalizerSupportedCultures<JsonConfigurationSource> configureSource);
+services.AddJsonLanguageLocalizerSupportedCultures(Action<JsonConfigurationSource> configureSource);
 services.AddJsonLanguageLocalizerSupportedCultures(string path, bool optional);
 services.AddJsonLanguageLocalizerSupportedCultures(string path, bool optional, bool reloadOnChange);
 ```
@@ -217,7 +217,7 @@ await host.SetBlazorCurrentThreadCultureFromJsonLanguageLocalizerSupportedCultur
 var jsonLanguageLocalizer = host.Services.GetRequiredService<IJsonLanguageLocalizerService>();
 
 //Loads the service with the source by the current thread culture info
-var jsonLanguageLocalizerService = await JsonLanguageLocalizerServiceHelper.GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(httpClient, LanguageLocalizerSupportedCultures);
+var jsonLanguageLocalizerService = await host.GetJsonLanguageLocalizerServiceFromSupportedCulturesAsync(httpClient, LanguageLocalizerSupportedCultures);
 
 //Initializes the jsonLanguageLocalizer service
 jsonLanguageLocalizer.ChangeLanguageLocalizer(jsonLanguageLocalizerService);
