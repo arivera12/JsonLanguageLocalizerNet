@@ -1,5 +1,4 @@
 ﻿using JsonLanguageLocalizerNet.Helpers;
-using Microsoft.AspNetCore.Components.WebAssembly.Http;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -77,7 +76,7 @@ namespace JsonLanguageLocalizerNet.Blazor.Helpers
                 try
                 {
                     var request = new HttpRequestMessage(new HttpMethod(httpMethod), requestUri);
-                    request.SetBrowserRequestCache(BrowserRequestCache.NoCache);
+                    request.Headers.CacheControl.NoCache = true;
                     var response = await httpClient.SendAsync(request);
                     return new JsonLanguageLocalizerService(await response.Content.ReadAsStreamAsync());
                 }
